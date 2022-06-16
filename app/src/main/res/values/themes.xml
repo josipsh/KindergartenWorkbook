@@ -27,4 +27,46 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+
+    <style name="AppTheme.NormalButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="textAllCaps">true</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+
+        <item name="shapeAppearance">@style/AppTheme.NormalButton.Shape</item>
+
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:padding">15dp</item>
+
+        <item name="strokeColor">@color/colorOnPrimary</item>
+        <item name="strokeWidth">1.5dp</item>
+
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="rippleColor">@color/colorPrimaryVariant</item>
+
+    </style>
+
+    <style name="AppTheme.NormalButton.Shape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">160dp</item>
+    </style>
+
+    <style name="AppTheme.TextFieldLayoutTheme" parent="Widget.Design.TextInputLayout">
+        <item name="android:colorControlActivated">@color/colorSecondaryVariant</item>
+    </style>
+
+    <style name="AppTheme.TextFieldLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="boxStrokeColor">@color/colorOnPrimary</item>
+        <item name="boxStrokeErrorColor">@color/colorError</item>
+        <item name="hintTextColor">@color/colorOnPrimary</item>
+
+        <item name="colorOnSurface">@color/colorOnPrimary</item>
+        <item name="colorError">@color/colorError</item>
+    </style>
+
 </resources>
