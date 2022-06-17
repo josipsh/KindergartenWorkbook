@@ -2,6 +2,7 @@ package hr.kindergartenworkbook
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import hr.kindergartenworkbook.data.Repository
 import hr.kindergartenworkbook.databinding.ActivityMainBinding
 import hr.kindergartenworkbook.view.LoginFragment
 
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.navHostView, LoginFragment())
+            .add(R.id.navHostView, LoginFragment(Repository()))
             .commit()
     }
 }

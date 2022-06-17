@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">KindergartenWorkbook</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Kindergarten workbook</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="save">Save</string>
 </resources>

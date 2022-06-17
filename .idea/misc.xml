@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/_ucenje/pavic_app/mobile/app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
+        <entry key="..\:/_ucenje/pavic_app/mobile/app/src/main/res/layout/category_spinner_item.xml" value="0.18697916666666667" />
+        <entry key="..\:/_ucenje/pavic_app/mobile/app/src/main/res/layout/children_observable_item.xml" value="0.2947916666666667" />
+        <entry key="..\:/_ucenje/pavic_app/mobile/app/src/main/res/layout/fragment_children_observation.xml" value="0.17395833333333333" />
         <entry key="..\:/_ucenje/pavic_app/mobile/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/_ucenje/pavic_app/mobile/app/src/main/res/layout/fragment_observation.xml" value="0.35260416666666666" />
       </map>

@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import hr.kindergartenworkbook.R
+import hr.kindergartenworkbook.data.IRepository
 import hr.kindergartenworkbook.databinding.FragmentLoginBinding
 
-class LoginFragment : Fragment() {
+class LoginFragment(private val repo: IRepository) : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
 
@@ -37,7 +38,7 @@ class LoginFragment : Fragment() {
     private fun switchFragment(){
         activity?.supportFragmentManager
             ?.beginTransaction()
-            ?.replace(R.id.navHostView, ObservationFragment())
+            ?.replace(R.id.navHostView, ObservationFragment(repo))
             ?.addToBackStack(null)
             ?.commit() ?: Toast.makeText(this.context, "Unable to login", Toast.LENGTH_SHORT).show()
     }
