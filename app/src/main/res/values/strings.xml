@@ -5,4 +5,8 @@
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="save">Save</string>
+    <string name="positive">positive</string>
+    <string name="negative">negative</string>
+    <string name="middle_grade">middle grade</string>
+    <string name="note">note</string>
 </resources>

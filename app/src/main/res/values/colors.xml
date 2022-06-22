@@ -3,7 +3,7 @@
     <color name="colorPrimary">#F8F9FA</color>
     <color name="colorPrimaryDark">#E9ECEF</color>
     <color name="colorPrimaryVariant">#DEE2E6</color>
-    <color name="colorOnPrimary">#343A40</color>
+    <color name="colorOnPrimary">#1B6EC2</color>
 
     <color name="colorSecondary">#F8F9FA</color>
     <color name="colorSecondaryVariant">#ADB5BD</color>

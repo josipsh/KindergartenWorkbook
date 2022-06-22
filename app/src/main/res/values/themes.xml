@@ -27,7 +27,6 @@
         <item name="android:textSize">20sp</item>
     </style>
 
-
     <style name="AppTheme.NormalButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="textAllCaps">true</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
@@ -44,7 +43,6 @@
 
         <item name="backgroundTint">@color/colorPrimary</item>
         <item name="rippleColor">@color/colorPrimaryVariant</item>
-
     </style>
 
     <style name="AppTheme.NormalButton.Shape">

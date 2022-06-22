@@ -1,48 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:gravity="center_vertical">
 
     <TextView
         android:id="@+id/etFullName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="4"
-        tools:text="Full name"/>
+        android:layout_weight="3"
+        tools:text="Full name" />
 
-    <TextView
+    <ImageButton
         android:id="@+id/btnPositiveGrade"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@android:color/transparent"
         android:gravity="center"
-        android:text="+"/>
+        android:src="@drawable/plus_icon"
+        android:contentDescription="@string/positive" />
 
-    <TextView
+    <ImageButton
         android:id="@+id/btnNegativeGrade"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@android:color/transparent"
         android:gravity="center"
-        android:text="-"/>
+        android:src="@drawable/minus_icon"
+        android:contentDescription="@string/negative" />
 
-    <TextView
+    <ImageButton
         android:id="@+id/btnMiddleGrade"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@android:color/transparent"
         android:gravity="center"
-        android:text="+/-"/>
+        android:src="@drawable/plus_minus_icon"
+        android:contentDescription="@string/middle_grade" />
 
-    <TextView
+    <ImageButton
         android:id="@+id/btnNote"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@android:color/transparent"
         android:gravity="center"
-        android:text="note"/>
+        android:src="@drawable/note"
+        android:contentDescription="@string/note" />
 
 </LinearLayout>
