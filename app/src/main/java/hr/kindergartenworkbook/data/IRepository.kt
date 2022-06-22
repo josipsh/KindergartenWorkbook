@@ -10,5 +10,5 @@ interface IRepository {
     fun getCategories(): List<Category>
     fun getActivities(groupId: Int, date: String): List<Activity>
     fun getChildren(groupId: Int, activityId: Int): List<Child>
-    fun saveObservation(children: List<Child>)
+    fun saveObservation(children: List<Child>): Boolean
 }

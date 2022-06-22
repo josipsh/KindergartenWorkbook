@@ -67,4 +67,11 @@
         <item name="colorError">@color/colorError</item>
     </style>
 
+    <style name="AppTheme.InputDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="buttonBarButtonStyle">@style/AppTheme.InputDialog.Button</item>
+    </style>
+
+    <style name="AppTheme.InputDialog.Button" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/colorOnPrimary</item>
+    </style>
 </resources>

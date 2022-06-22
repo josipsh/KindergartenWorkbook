@@ -5,8 +5,8 @@ data class Child (
     val activityId: Int,
     val firstName: String,
     val lastName: String,
-    val grade: Int,
-    val note: String
+    var grade: Int,
+    var note: String
 ){
     override fun toString(): String {
         return "$firstName $lastName"

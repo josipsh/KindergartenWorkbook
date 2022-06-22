@@ -36,11 +36,11 @@ class Repository : IRepository {
     }
 
     override fun login(userName: String, password: String): User {
-        TODO("Not yet implemented")
+        return User(1, 1)
     }
 
-    override fun saveObservation(children: List<Child>) {
-        TODO("Not yet implemented")
+    override fun saveObservation(children: List<Child>): Boolean {
+        return true
     }
 
 }

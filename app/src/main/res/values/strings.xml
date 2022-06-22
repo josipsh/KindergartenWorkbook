@@ -9,4 +9,6 @@
     <string name="negative">negative</string>
     <string name="middle_grade">middle grade</string>
     <string name="note">note</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
 </resources>
