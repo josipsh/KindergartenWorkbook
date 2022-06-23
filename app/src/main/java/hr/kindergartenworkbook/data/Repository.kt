@@ -36,7 +36,7 @@ class Repository : IRepository {
     }
 
     override fun login(userName: String, password: String): User {
-        return User(1, 1)
+        return User(1, 1, "Jabikice")
     }
 
     override fun saveObservation(children: List<Child>): Boolean {

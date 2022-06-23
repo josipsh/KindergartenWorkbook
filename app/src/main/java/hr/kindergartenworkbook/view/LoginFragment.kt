@@ -1,5 +1,6 @@
 package hr.kindergartenworkbook.view
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,12 @@ import hr.kindergartenworkbook.databinding.FragmentLoginBinding
 class LoginFragment(private val repo: IRepository) : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
+    private lateinit var parent: ActionBarChangeable
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        parent = context as ActionBarChangeable
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +39,12 @@ class LoginFragment(private val repo: IRepository) : Fragment() {
     }
 
     private fun logIn() {
+        val user = repo.login(
+            binding.etUserName.editText?.text.toString(),
+            binding.etPassword.editText?.text.toString()
+        )
 
+        parent.changeActionBarTitle(user.groupName)
     }
 
     private fun switchFragment(){
