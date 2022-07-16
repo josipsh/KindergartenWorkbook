@@ -11,13 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Spinner
-            android:id="@+id/categorySpinner"
+        <TextView
+            android:id="@+id/etGroupName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:spinnerMode="dropdown"
-            android:layout_margin="10dp"/>
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:textSize="15sp"
+            android:gravity="start"
+            tools:text="JBUKICE"/>
 
         <TextView
             android:id="@+id/etDate"

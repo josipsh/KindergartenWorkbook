@@ -4,10 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import hr.kindergartenworkbook.data.Repository
 import hr.kindergartenworkbook.databinding.ActivityMainBinding
-import hr.kindergartenworkbook.view.ActionBarChangeable
 import hr.kindergartenworkbook.view.LoginFragment
 
-class MainActivity : AppCompatActivity(), ActionBarChangeable {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -19,9 +18,5 @@ class MainActivity : AppCompatActivity(), ActionBarChangeable {
             .beginTransaction()
             .add(R.id.navHostView, LoginFragment(Repository()))
             .commit()
-    }
-
-    override fun changeActionBarTitle(actionBarTitle: String) {
-        supportActionBar?.title = actionBarTitle
     }
 }

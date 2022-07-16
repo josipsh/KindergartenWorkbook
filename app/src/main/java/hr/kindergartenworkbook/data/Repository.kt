@@ -6,15 +6,7 @@ import hr.kindergartenworkbook.model.Child
 import hr.kindergartenworkbook.model.User
 
 class Repository : IRepository {
-
-    override fun getCategories(): List<Category> {
-        return listOf(
-            Category(1, "Category 1", "code 1"),
-            Category(2, "Category 2", "code 2"),
-            Category(3, "Category 3", "code 3"),
-            Category(4, "Category 4", "code 4")
-        )
-    }
+    private var userData: User? = User(1, 1, "Jabukice")
 
     override fun getActivities(groupId: Int, date: String): List<Activity> {
         return listOf(
@@ -36,7 +28,14 @@ class Repository : IRepository {
     }
 
     override fun login(userName: String, password: String): User {
+        //throw Exception("Invalid username or password")
         return User(1, 1, "Jabikice")
+    }
+
+    override fun getUser(): User {
+        userData?.let {
+            return it
+        } ?: run { throw  Exception() }
     }
 
     override fun saveObservation(children: List<Child>): Boolean {
