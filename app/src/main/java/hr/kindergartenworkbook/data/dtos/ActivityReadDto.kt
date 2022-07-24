@@ -1,14 +1,14 @@
 package hr.kindergartenworkbook.data.dtos
 
-data class ActivityDtoItem(
-    val Category: Category,
+data class ActivityReadDto(
+    val Category: CategoryReadDto,
     val CategoryId: Int,
     val Date: String,
-    val Description: String,
+    val Description: Any,
     val DevSubCategory: DevSubCategory,
-    val Group: Group,
+    val Group: Any,
     val GroupId: Int,
     val Id: Int,
-    val Observations: List<Observation>,
+    val Observations: Any,
     val SubCategoryId: Int
 )

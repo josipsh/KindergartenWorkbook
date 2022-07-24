@@ -1,18 +1,18 @@
 package hr.kindergartenworkbook.data.dtos
 
-data class Parent(
-    val Address: String,
-    val City: City,
-    val CityId: Int,
+data class UserDto(
+    val Address: Any,
+    val City: Any,
+    val CityId: Any,
     val Email: String,
     val FirstName: String,
-    val Group: String,
+    val Group: Any,
     val GroupId: Int,
     val Id: String,
-    val Kindergarten: KindergartenXX,
+    val Kindergarten: Any,
     val KindergartenId: Int,
     val LastName: String,
-    val Password: String,
-    val PhoneNo: String,
+    val Password: Any,
+    val PhoneNo: Any,
     val Username: String
 )

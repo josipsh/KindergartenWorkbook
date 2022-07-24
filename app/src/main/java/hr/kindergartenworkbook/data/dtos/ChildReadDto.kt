@@ -1,13 +1,13 @@
 package hr.kindergartenworkbook.data.dtos
 
-data class Children(
+data class ChildReadDto(
     val FirstName: String,
-    val Group: String,
+    val Group: Any,
     val GroupId: Int,
     val Id: Int,
-    val Kindergarten: KindergartenXX,
+    val Kindergarten: Any,
     val KindergartenId: Int,
     val LastName: String,
-    val Parent: Parent,
+    val Parent: ParentReadDto,
     val ParentId: String
 )
