@@ -7,10 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import hr.kindergartenworkbook.R
 import hr.kindergartenworkbook.data.IRepository
 import hr.kindergartenworkbook.databinding.FragmentLoginBinding
 import hr.kindergartenworkbook.utils.showShortToast
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.Dispatcher
 
 class LoginFragment(private val repo: IRepository) : Fragment() {
 
@@ -28,20 +35,25 @@ class LoginFragment(private val repo: IRepository) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnLogIn.setOnClickListener {
-            try {
-                logIn()
-                switchFragment()
-            } catch (e: Exception) {
-                this.requireContext().showShortToast(e.message ?: "Unknown error occurred")
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    try {
+                        repo.login(
+                            binding.etUserName.editText?.text.toString(),
+                            binding.etPassword.editText?.text.toString()
+                        )
+                        withContext(Dispatchers.Main) {
+                            switchFragment()
+                        }
+                    } catch (e: Exception) {
+                        withContext(Dispatchers.Main) {
+                            this@LoginFragment.requireContext()
+                                .showShortToast(e.message ?: "Unknown error occurred")
+                        }
+                    }
+                }
             }
         }
-    }
-
-    private fun logIn() {
-        repo.login(
-            binding.etUserName.editText?.text.toString(),
-            binding.etPassword.editText?.text.toString()
-        )
     }
 
     private fun switchFragment() {

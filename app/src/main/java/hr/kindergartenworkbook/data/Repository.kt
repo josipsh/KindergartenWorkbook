@@ -1,45 +1,89 @@
 package hr.kindergartenworkbook.data
 
+import hr.kindergartenworkbook.data.dtos.LoginRequestDto
 import hr.kindergartenworkbook.model.Activity
-import hr.kindergartenworkbook.model.Category
 import hr.kindergartenworkbook.model.Child
 import hr.kindergartenworkbook.model.User
+import retrofit2.Retrofit
+import retrofit2.awaitResponse
+import retrofit2.converter.gson.GsonConverterFactory
 
 class Repository : IRepository {
-    private var userData: User? = User(1, 1, "Jabukice")
+    private var userData: User? = null
+    private var authToken: String = ""
+    private var retrofit: DataRestApiInterface = Retrofit.Builder()
+        .baseUrl(DataRestApiInterface.BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+        .create(DataRestApiInterface::class.java)
 
-    override fun getActivities(groupId: Int, date: String): List<Activity> {
-        return listOf(
-            Activity(1, "Activity 1"),
-            Activity(2, "Activity 2"),
-            Activity(3, "Activity 3"),
-            Activity(4, "Activity 4"),
-            Activity(5, "Activity 5"),
-            Activity(6, "Activity 6"),
-        )
+
+    override suspend fun getActivities(groupId: Int, date: String): List<Activity> {
+        val response = retrofit.getActivities(authToken, groupId, "2022-06-26").awaitResponse()
+
+        if (response.isSuccessful) {
+            response.body()?.let {
+                return it.map { c -> c.toModel() }
+            } ?: run { throw Exception("Unexpected error") }
+        } else {
+            throw Exception("${response.code()}")
+        }
     }
 
-    override fun getChildren(groupId: Int, activityId: Int): List<Child> {
-        return listOf(
-            Child(1, activityId, "Pero", "Peric", 0, "This is note"),
-            Child(2, activityId, "Lea", "Leic", 1, "This is note"),
-            Child(3, activityId, "Marko", "Maric", 2, "This is note"),
-        )
+    override suspend fun getChildren(groupId: Int, activityId: Int): List<Child> {
+        val response = retrofit.getChildren(authToken, groupId).awaitResponse()
+
+        if (response.isSuccessful) {
+            response.body()?.let {
+                return it.map { c -> c.toModel() }
+            } ?: run { throw Exception("Unexpected error") }
+        } else {
+            throw Exception("${response.code()}")
+        }
     }
 
-    override fun login(userName: String, password: String): User {
-        //throw Exception("Invalid username or password")
-        return User(1, 1, "Jabikice")
+    override suspend fun login(userName: String, password: String): User {
+        getUserData(userName, password)
+        getGroupName()
+        return userData ?: run { throw Exception("Unexpected error") }
     }
 
-    override fun getUser(): User {
+    override suspend fun getUser(): User {
         userData?.let {
             return it
-        } ?: run { throw  Exception() }
+        } ?: run { throw  Exception("Unexpected error") }
     }
 
-    override fun saveObservation(children: List<Child>): Boolean {
+    override suspend fun saveObservation(children: List<Child>): Boolean {
         return true
     }
 
+    private fun getUserData(userName: String, password: String) {
+        val response = retrofit.login(LoginRequestDto(userName, password)).execute()
+
+        if (response.isSuccessful) {
+            response.body()?.let {
+                userData = User(it.User.Id, it.User.GroupId, "")
+                authToken = "Bearer ${it.Token}"
+            }
+        } else {
+            throw Exception("${response.code()}")
+        }
+    }
+
+    private fun getGroupName() {
+        userData?.groupId?.let {
+            val response = retrofit.getGroup(authToken, it).execute()
+
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    userData?.let { user ->
+                        user.groupName = it.Name
+                    }
+                }
+            } else {
+                throw Exception("${response.code()}")
+            }
+        }
+    }
 }

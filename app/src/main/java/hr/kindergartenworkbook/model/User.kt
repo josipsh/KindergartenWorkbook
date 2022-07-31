@@ -1,7 +1,7 @@
 package hr.kindergartenworkbook.model
 
 data class User(
-    val Id: Int,
+    val Id: String,
     val groupId: Int,
-    val groupName: String
+    var groupName: String
 )

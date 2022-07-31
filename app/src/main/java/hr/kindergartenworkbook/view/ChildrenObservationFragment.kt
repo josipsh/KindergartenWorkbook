@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import hr.kindergartenworkbook.R
 import hr.kindergartenworkbook.data.IRepository
@@ -13,8 +16,13 @@ import hr.kindergartenworkbook.databinding.AlertEditTextBinding
 import hr.kindergartenworkbook.databinding.FragmentChildrenObservationBinding
 import hr.kindergartenworkbook.model.Activity
 import hr.kindergartenworkbook.model.Child
+import hr.kindergartenworkbook.utils.showShortToast
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class ChildrenObservationFragment(private val repo: IRepository, private val activity: Activity) : Fragment() {
+class ChildrenObservationFragment(private val repo: IRepository, private val activity: Activity) :
+    Fragment() {
 
     private lateinit var binding: FragmentChildrenObservationBinding
     private lateinit var children: List<Child>
@@ -29,23 +37,53 @@ class ChildrenObservationFragment(private val repo: IRepository, private val act
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        children = repo.getChildren(0, activity.id)
 
-        binding.recycleView.adapter = ChildrenObservableRecyclerViewAdapter(children){
-            handleInputAlert(it)
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                try {
+                    children = repo.getChildren(1, activity.id)
+
+                    withContext(Dispatchers.Main) {
+                        binding.recycleView.adapter =
+                            ChildrenObservableRecyclerViewAdapter(children) {
+                                handleInputAlert(it)
+                            }
+                        binding.recycleView.layoutManager = LinearLayoutManager(requireContext())
+                    }
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        this@ChildrenObservationFragment.requireContext()
+                            .showShortToast(e.message ?: "Unknown error occurred")
+                    }
+                }
+            }
         }
-        binding.recycleView.layoutManager = LinearLayoutManager(requireContext())
 
         binding.btnSave.setOnClickListener {
-            if (repo.saveObservation(children)){
-                handleAlert("Saved", "Changes are successfully saved")
-            }else{
-                handleAlert("Error", "Unknown error occurred!")
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    try {
+                        if (repo.saveObservation(children)) {
+                            withContext(Dispatchers.Main) {
+                                handleAlert("Saved", "Changes are successfully saved")
+                            }
+                        } else {
+                            withContext(Dispatchers.Main) {
+                                handleAlert("Not saved", "Unexpected error occurred")
+                            }
+                        }
+                    } catch (e: Exception) {
+                        withContext(Dispatchers.Main) {
+                            this@ChildrenObservationFragment.requireContext()
+                                .showShortToast(e.message ?: "Unknown error occurred")
+                        }
+                    }
+                }
             }
         }
     }
 
-    private fun handleInputAlert(child: Child){
+    private fun handleInputAlert(child: Child) {
         val inflater = requireActivity().layoutInflater
         val editTextBinding = AlertEditTextBinding.inflate(inflater)
         editTextBinding.etNote.editText?.setText(child.note)
@@ -53,7 +91,7 @@ class ChildrenObservationFragment(private val repo: IRepository, private val act
         AlertDialog.Builder(this.requireContext(), R.style.AppTheme_InputDialog).apply {
             setTitle("Enter note for $child")
             setView(editTextBinding.root)
-            setPositiveButton(getString(R.string.ok)) {_,_ ->
+            setPositiveButton(getString(R.string.ok)) { _, _ ->
                 child.note = editTextBinding.etNote.editText?.text.toString()
             }
             setNegativeButton(getString(R.string.cancel), null)
@@ -63,7 +101,7 @@ class ChildrenObservationFragment(private val repo: IRepository, private val act
         }
     }
 
-    private fun handleAlert(title: String, message: String){
+    private fun handleAlert(title: String, message: String) {
         AlertDialog.Builder(this.requireContext(), R.style.AppTheme_InputDialog).apply {
             setTitle(title)
             setMessage(message)

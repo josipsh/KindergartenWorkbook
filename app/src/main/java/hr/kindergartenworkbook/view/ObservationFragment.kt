@@ -5,11 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.tabs.TabLayoutMediator
 import hr.kindergartenworkbook.data.IRepository
 import hr.kindergartenworkbook.databinding.FragmentObservationBinding
 import hr.kindergartenworkbook.model.Activity
 import hr.kindergartenworkbook.model.User
+import hr.kindergartenworkbook.utils.showShortToast
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,14 +37,25 @@ class ObservationFragment(private val repo: IRepository) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        user = repo.getUser()
-        activities = repo.getActivities(user.groupId, "")
-
-        setGroupName()
-        initTodayDate()
-        initViewPager()
-        initTabLayout()
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                try {
+                    user = repo.getUser()
+                    activities = repo.getActivities(user.groupId, "")
+                    withContext(Dispatchers.Main) {
+                        setGroupName()
+                        initTodayDate()
+                        initViewPager()
+                        initTabLayout()
+                    }
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        this@ObservationFragment.requireContext()
+                            .showShortToast(e.message ?: "Unknown error occurred")
+                    }
+                }
+            }
+        }
     }
 
     private fun setGroupName() {
