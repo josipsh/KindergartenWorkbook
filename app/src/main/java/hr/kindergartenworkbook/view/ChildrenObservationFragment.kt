@@ -61,6 +61,8 @@ class ChildrenObservationFragment(private val repo: IRepository, private val act
         }
 
         binding.btnSave.setOnClickListener {
+            this@ChildrenObservationFragment.requireContext().showShortToast("Saving...")
+
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     try {

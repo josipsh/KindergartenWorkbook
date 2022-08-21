@@ -35,6 +35,8 @@ class LoginFragment(private val repo: IRepository) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnLogIn.setOnClickListener {
+            this@LoginFragment.requireContext().showShortToast("Login started!")
+
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     try {
