@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
@@ -15,8 +15,9 @@
         <item name="colorError">@color/colorError</item>
 
         <item name="android:windowLightStatusBar">true</item>
-<!--        <item name="actionBarStyle">@style/AppTheme.ActionBar</item>-->
         <item name="actionBarTheme">@style/AppTheme.ActionBarTheme</item>
+
+        <item name="tabStyle">@style/Widget.App.TabLayout</item>
     </style>
 
     <style name="AppTheme.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
@@ -79,5 +80,15 @@
 
     <style name="AppTheme.InputDialog.Button" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/colorOnPrimary</item>
+    </style>
+
+    <style name="Widget.App.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TabLayout</item>
+    </style>
+
+    <style name="ThemeOverlay.App.TabLayout" parent="">
+        <item name="colorPrimary">@color/colorOnPrimary</item>
+        <item name="colorSurface">@color/colorPrimary</item>
+        <item name="colorOnSurface">@color/colorOnPrimary</item>
     </style>
 </resources>
