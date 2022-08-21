@@ -17,7 +17,7 @@ data class ActivityReadDto(
     fun toModel(): Activity {
         return Activity(
             Id,
-            Id.toString()
+            DevSubCategory.Name
         )
     }
 }

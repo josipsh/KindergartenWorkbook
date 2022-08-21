@@ -20,6 +20,7 @@ import hr.kindergartenworkbook.utils.showShortToast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 
 class ChildrenObservationFragment(private val repo: IRepository, private val activity: Activity) :
     Fragment() {
@@ -41,7 +42,7 @@ class ChildrenObservationFragment(private val repo: IRepository, private val act
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 try {
-                    children = repo.getChildren(1, activity.id)
+                    children = repo.getChildren(activity.id)
 
                     withContext(Dispatchers.Main) {
                         binding.recycleView.adapter =
@@ -63,7 +64,7 @@ class ChildrenObservationFragment(private val repo: IRepository, private val act
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
                 viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     try {
-                        if (repo.saveObservation(children)) {
+                        if (repo.saveObservation(activity, children, Date())) {
                             withContext(Dispatchers.Main) {
                                 handleAlert("Saved", "Changes are successfully saved")
                             }

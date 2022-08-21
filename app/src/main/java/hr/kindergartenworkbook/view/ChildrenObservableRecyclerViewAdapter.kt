@@ -21,19 +21,19 @@ class ChildrenObservableRecyclerViewAdapter(
             binding.etFullName.text = child.toString()
 
             binding.btnPositiveGrade.setOnClickListener {
-                child.grade = 0
+                child.grade = 1
                 binding.btnPositiveGrade.setImageResource(R.drawable.plus_fill_icon)
                 binding.btnNegativeGrade.setImageResource(R.drawable.minus_icon)
                 binding.btnMiddleGrade.setImageResource(R.drawable.plus_minus_icon)
             }
             binding.btnNegativeGrade.setOnClickListener {
-                child.grade = 1
+                child.grade = 2
                 binding.btnNegativeGrade.setImageResource(R.drawable.minus_fill_icon)
                 binding.btnPositiveGrade.setImageResource(R.drawable.plus_icon)
                 binding.btnMiddleGrade.setImageResource(R.drawable.plus_minus_icon)
             }
             binding.btnMiddleGrade.setOnClickListener {
-                child.grade = 2
+                child.grade = 3
                 binding.btnMiddleGrade.setImageResource(R.drawable.plus_minus_fill_icon)
                 binding.btnPositiveGrade.setImageResource(R.drawable.plus_icon)
                 binding.btnNegativeGrade.setImageResource(R.drawable.minus_icon)

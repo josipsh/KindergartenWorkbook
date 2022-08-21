@@ -25,7 +25,7 @@ class ObservationFragment(private val repo: IRepository) : Fragment() {
     private lateinit var binding: FragmentObservationBinding
     private lateinit var activities: List<Activity>
     private lateinit var user: User
-    private var todayDate: Date = Date()
+    private var todayDate = Date()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,11 +37,13 @@ class ObservationFragment(private val repo: IRepository) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 try {
                     user = repo.getUser()
-                    activities = repo.getActivities(user.groupId, "")
+                    activities = repo.getActivities(todayDate)
                     withContext(Dispatchers.Main) {
                         setGroupName()
                         initTodayDate()

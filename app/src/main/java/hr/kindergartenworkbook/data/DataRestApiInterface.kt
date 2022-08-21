@@ -1,6 +1,7 @@
 package hr.kindergartenworkbook.data
 
 import hr.kindergartenworkbook.data.dtos.*
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -43,13 +44,17 @@ interface DataRestApiInterface {
     @POST("/api/account/login")
     fun login(@Body userData: LoginRequestDto): Call<LoginResponseDto>
 
+    @Headers(
+        "Accept: application/json",
+        "Content-Type: application/json"
+    )
     @POST("/api/observation")
     fun saveObservation(
         @Header("Authorization") authToken: String,
-        @Body observationData: LoginRequestDto
-    ): Call<String>
+        @Body observationData: ObservationCreateDto
+    ): Call<ObservationResponseDto>
 
     companion object {
-        const val BASE_URL: String = "http://192.168.0.16:5000"
+        const val BASE_URL: String = "http://192.168.0.11:5000"
     }
 }
