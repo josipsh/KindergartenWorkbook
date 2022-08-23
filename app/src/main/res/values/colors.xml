@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#F8F9FA</color>
-    <color name="colorPrimaryDark">#E9ECEF</color>
+    <color name="colorPrimary">#17A2B8</color>
+    <color name="colorPrimaryDark">#F5F5F5</color>
     <color name="colorPrimaryVariant">#DEE2E6</color>
-    <color name="colorOnPrimary">#1B6EC2</color>
+    <color name="colorOnPrimary">#000000</color>
 
     <color name="colorSecondary">#F8F9FA</color>
     <color name="colorSecondaryVariant">#ADB5BD</color>
     <color name="colorOnSecondary">#6C757D</color>
 
-    <color name="colorSurface">@color/colorPrimary</color>
-    <color name="colorOnSurface">@color/colorOnPrimary</color>
+    <color name="colorSurface">@color/colorPrimaryDark</color>
+    <color name="colorOnSurface">@color/colorPrimary</color>
 
     <color name="colorError">#DF2518</color>
     <color name="colorError50">#81DF2518</color>

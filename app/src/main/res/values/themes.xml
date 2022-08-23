@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
@@ -16,8 +16,6 @@
 
         <item name="android:windowLightStatusBar">true</item>
         <item name="actionBarTheme">@style/AppTheme.ActionBarTheme</item>
-
-        <item name="tabStyle">@style/Widget.App.TabLayout</item>
     </style>
 
     <style name="AppTheme.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
@@ -45,10 +43,10 @@
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:padding">15dp</item>
 
-        <item name="strokeColor">@color/colorOnPrimary</item>
+        <item name="strokeColor">@color/colorPrimary</item>
         <item name="strokeWidth">1.5dp</item>
 
-        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="backgroundTint">@color/colorPrimaryDark</item>
         <item name="rippleColor">@color/colorPrimaryVariant</item>
     </style>
 
@@ -66,11 +64,11 @@
         <item name="android:layout_marginRight">10dp</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="boxStrokeColor">@color/colorOnPrimary</item>
+        <item name="boxStrokeColor">@color/colorPrimary</item>
         <item name="boxStrokeErrorColor">@color/colorError</item>
-        <item name="hintTextColor">@color/colorOnPrimary</item>
+        <item name="hintTextColor">@color/colorPrimary</item>
 
-        <item name="colorOnSurface">@color/colorOnPrimary</item>
+        <item name="colorOnSurface">@color/colorPrimary</item>
         <item name="colorError">@color/colorError</item>
     </style>
 
@@ -79,16 +77,6 @@
     </style>
 
     <style name="AppTheme.InputDialog.Button" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
-        <item name="android:textColor">@color/colorOnPrimary</item>
-    </style>
-
-    <style name="Widget.App.TabLayout" parent="Widget.MaterialComponents.TabLayout">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TabLayout</item>
-    </style>
-
-    <style name="ThemeOverlay.App.TabLayout" parent="">
-        <item name="colorPrimary">@color/colorOnPrimary</item>
-        <item name="colorSurface">@color/colorPrimary</item>
-        <item name="colorOnSurface">@color/colorOnPrimary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 </resources>
